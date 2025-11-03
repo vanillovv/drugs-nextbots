@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 1,
+  "id": "drugs-nextbots",
+  "version": "${version}",
+  "name": "drugs-nextbots",
+  "description": "",
+  "authors": [],
+  "contact": {},
+  "license": "All-Rights-Reserved",
+  "icon": "assets/nextbots/icon.png",
+  "environment": "client",
+  "entrypoints": {
+    "main": [
+      "ru.vanilla.nextbots.NextBots"
+    ]
+  },
+  "mixins": [
+    "drugs-nextbots.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=${loader_version}",
+    "fabric": "*",
+    "minecraft": "${minecraft_version}"
+  }
+}
