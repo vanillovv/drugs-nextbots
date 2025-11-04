@@ -1,6 +1,5 @@
 package ru.vanilla.nextbots.nextbot;
 
-import com.mojang.blaze3d.platform.GlStateManager;
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.gl.ShaderProgramKeys;
 import net.minecraft.client.render.BufferBuilder;
@@ -12,19 +11,15 @@ import net.minecraft.client.render.entity.LivingEntityRenderer;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.math.RotationAxis;
 import net.minecraft.util.math.Vec3d;
-import org.jetbrains.annotations.Nullable;
-import ru.vanilla.nextbots.NextBots;
+import ru.vanilla.nextbots.client.NextBotsClient;
 import ru.vanilla.nextbots.utilities.RenderUtility;
 import ru.vanilla.nextbots.utilities.Wrapper;
-
-import java.awt.*;
 
 public class NextbotEntityRenderer extends LivingEntityRenderer<NextbotEntity, NextbotEntityRenderState, NextbotEntityModel> implements Wrapper {
 
     public NextbotEntityRenderer(EntityRendererFactory.Context ctx) {
-        super(ctx, new NextbotEntityModel(ctx.getPart(NextBots.NEXTBOT_LAYER)), 1f);
+        super(ctx, new NextbotEntityModel(ctx.getPart(NextBotsClient.NEXTBOT_LAYER)), 1f);
     }
 
     @Override
@@ -37,7 +32,7 @@ public class NextbotEntityRenderer extends LivingEntityRenderer<NextbotEntity, N
         RenderSystem.enableBlend();
         RenderSystem.depthMask(true);
         RenderSystem.disableCull();
-        RenderSystem.setShaderTexture(0, NextBots.id("nextbot.png"));
+        RenderSystem.setShaderTexture(0, NextBotsClient.id("nextbot.png"));
         RenderSystem.setShader(ShaderProgramKeys.POSITION_TEX_COLOR);
         BufferBuilder builder = RenderUtility.builder(VertexFormat.DrawMode.QUADS, VertexFormats.POSITION_TEXTURE_COLOR);
 
@@ -68,7 +63,7 @@ public class NextbotEntityRenderer extends LivingEntityRenderer<NextbotEntity, N
 
     @Override
     public Identifier getTexture(NextbotEntityRenderState state) {
-        return NextBots.id("empty.png");
+        return NextBotsClient.id("empty.png");
     }
 
     @Override

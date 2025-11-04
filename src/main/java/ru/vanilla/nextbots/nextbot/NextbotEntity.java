@@ -7,13 +7,19 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Arm;
 import net.minecraft.world.World;
+import ru.vanilla.nextbots.utilities.Wrapper;
 
 import java.util.Collections;
 
-public class NextbotEntity extends LivingEntity {
+public class NextbotEntity extends LivingEntity implements Wrapper {
 
     public NextbotEntity(EntityType<? extends LivingEntity> entityType, World world) {
         super(entityType, world);
+    }
+
+    @Override
+    public void tick() {
+        super.tick();
     }
 
     @Override
@@ -55,7 +61,6 @@ public class NextbotEntity extends LivingEntity {
 
     @Override
     public void equipStack(EquipmentSlot slot, ItemStack stack) {
-
     }
 
     @Override

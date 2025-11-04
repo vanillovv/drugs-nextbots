@@ -1,6 +1,6 @@
-package ru.vanilla.nextbots;
+package ru.vanilla.nextbots.client;
 
-import net.fabricmc.api.ModInitializer;
+import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityModelLayerRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
@@ -16,7 +16,7 @@ import ru.vanilla.nextbots.nextbot.NextbotEntity;
 import ru.vanilla.nextbots.nextbot.NextbotEntityModel;
 import ru.vanilla.nextbots.nextbot.NextbotEntityRenderer;
 
-public class NextBots implements ModInitializer {
+public class NextBotsClient implements ClientModInitializer {
 
     public final EntityType<NextbotEntity> NEXTBOT_TYPE = Registry.register(
             Registries.ENTITY_TYPE,
@@ -28,7 +28,7 @@ public class NextBots implements ModInitializer {
     public static final EntityModelLayer NEXTBOT_LAYER = new EntityModelLayer(id("nextbot"), "main");
 
     @Override
-    public void onInitialize() {
+    public void onInitializeClient() {
         FabricDefaultAttributeRegistry.register(NEXTBOT_TYPE, NextbotEntity.createLivingAttributes());
         EntityModelLayerRegistry.registerModelLayer(NEXTBOT_LAYER, NextbotEntityModel::getTexturedModelData);
         EntityRendererRegistry.register(NEXTBOT_TYPE, NextbotEntityRenderer::new);
