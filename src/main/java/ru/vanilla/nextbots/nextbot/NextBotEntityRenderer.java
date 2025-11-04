@@ -1,6 +1,8 @@
 package ru.vanilla.nextbots.nextbot;
 
 import com.mojang.blaze3d.systems.RenderSystem;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.minecraft.client.gl.ShaderProgramKeys;
 import net.minecraft.client.render.BufferBuilder;
 import net.minecraft.client.render.VertexConsumerProvider;
@@ -12,27 +14,29 @@ import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.Vec3d;
-import ru.vanilla.nextbots.client.NextBotsClient;
+import ru.vanilla.nextbots.NextBots;
+import ru.vanilla.nextbots.utilities.ClientConstants;
 import ru.vanilla.nextbots.utilities.RenderUtility;
-import ru.vanilla.nextbots.utilities.Wrapper;
+import ru.vanilla.nextbots.utilities.traits.Wrapper;
 
-public class NextbotEntityRenderer extends LivingEntityRenderer<NextbotEntity, NextbotEntityRenderState, NextbotEntityModel> implements Wrapper {
+@Environment(EnvType.CLIENT)
+public class NextBotEntityRenderer extends LivingEntityRenderer<NextBotEntity, NextBotEntityRenderState, NextBotEntityModel> implements Wrapper {
 
-    public NextbotEntityRenderer(EntityRendererFactory.Context ctx) {
-        super(ctx, new NextbotEntityModel(ctx.getPart(NextBotsClient.NEXTBOT_LAYER)), 1f);
+    public NextBotEntityRenderer(EntityRendererFactory.Context ctx) {
+        super(ctx, new NextBotEntityModel(ctx.getPart(ClientConstants.NEXTBOT_LAYER)), 1f);
     }
 
     @Override
-    public void updateRenderState(NextbotEntity livingEntity, NextbotEntityRenderState livingEntityRenderState, float f) {
+    public void updateRenderState(NextBotEntity livingEntity, NextBotEntityRenderState livingEntityRenderState, float f) {
         super.updateRenderState(livingEntity, livingEntityRenderState, f);
     }
 
     @Override
-    public void render(NextbotEntityRenderState livingEntityRenderState, MatrixStack matrixStack, VertexConsumerProvider vertexConsumerProvider, int i) {
+    public void render(NextBotEntityRenderState livingEntityRenderState, MatrixStack matrixStack, VertexConsumerProvider vertexConsumerProvider, int i) {
         RenderSystem.enableBlend();
         RenderSystem.depthMask(true);
         RenderSystem.disableCull();
-        RenderSystem.setShaderTexture(0, NextBotsClient.id("nextbot.png"));
+        RenderSystem.setShaderTexture(0, NextBots.id("nextbot.png"));
         RenderSystem.setShader(ShaderProgramKeys.POSITION_TEX_COLOR);
         BufferBuilder builder = RenderUtility.builder(VertexFormat.DrawMode.QUADS, VertexFormats.POSITION_TEXTURE_COLOR);
 
@@ -57,17 +61,17 @@ public class NextbotEntityRenderer extends LivingEntityRenderer<NextbotEntity, N
     }
 
     @Override
-    protected Text getDisplayName(NextbotEntity entity) {
+    protected Text getDisplayName(NextBotEntity entity) {
         return null;
     }
 
     @Override
-    public Identifier getTexture(NextbotEntityRenderState state) {
-        return NextBotsClient.id("empty.png");
+    public Identifier getTexture(NextBotEntityRenderState state) {
+        return NextBots.id("empty.png");
     }
 
     @Override
-    public NextbotEntityRenderState createRenderState() {
-        return new NextbotEntityRenderState();
+    public NextBotEntityRenderState createRenderState() {
+        return new NextBotEntityRenderState();
     }
 }

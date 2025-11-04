@@ -4,21 +4,34 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.item.ItemStack;
+import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.Arm;
 import net.minecraft.world.World;
-import ru.vanilla.nextbots.utilities.Wrapper;
 
 import java.util.Collections;
 
-public class NextbotEntity extends LivingEntity implements Wrapper {
+public class NextBotEntity extends LivingEntity {
 
-    public NextbotEntity(EntityType<? extends LivingEntity> entityType, World world) {
+    public NextBotEntity(EntityType<? extends LivingEntity> entityType, World world) {
         super(entityType, world);
     }
 
     @Override
     public void tick() {
+        if (getWorld().isClient) {
+
+        } else {
+            ServerWorld world = (ServerWorld) getWorld();
+            for (ServerPlayerEntity entity : world.getPlayers()) {
+                if (distanceTo(entity) > 3) continue;
+                if (entity.isDisconnected() || entity.isCreative() || entity.isDead()) continue;
+                if (entity.getBoundingBox().intersects(getBoundingBox())) entity.onKilledOther(world, this);
+            }
+        }
+
         super.tick();
     }
 
@@ -46,6 +59,11 @@ public class NextbotEntity extends LivingEntity implements Wrapper {
 
     @Override
     public boolean isPushable() {
+        return false;
+    }
+
+    @Override
+    public boolean damage(ServerWorld world, DamageSource source, float amount) {
         return false;
     }
 

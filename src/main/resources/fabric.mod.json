@@ -8,13 +8,13 @@
   "contact": {},
   "license": "All-Rights-Reserved",
   "icon": "assets/nextbots/nextbot.png",
-  "environment": "client",
+  "environment": "*",
   "entrypoints": {
+    "main": [
+      "ru.vanilla.nextbots.NextBots"
+    ],
     "client": [
       "ru.vanilla.nextbots.client.NextBotsClient"
-    ],
-    "server": [
-      "ru.vanilla.nextbots.server.NextBotsServer"
     ]
   },
   "mixins": [

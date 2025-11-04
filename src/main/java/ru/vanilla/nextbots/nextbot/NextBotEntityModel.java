@@ -1,16 +1,19 @@
 package ru.vanilla.nextbots.nextbot;
 
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.minecraft.client.model.*;
 import net.minecraft.client.render.entity.model.EntityModel;
 
-public class NextbotEntityModel extends EntityModel<NextbotEntityRenderState> {
+@Environment(EnvType.CLIENT)
+public class NextBotEntityModel extends EntityModel<NextBotEntityRenderState> {
 
-    protected NextbotEntityModel(ModelPart root) {
+    protected NextBotEntityModel(ModelPart root) {
         super(root);
     }
 
     @Override
-    public void setAngles(NextbotEntityRenderState state) {
+    public void setAngles(NextBotEntityRenderState state) {
         super.setAngles(state);
     }
 
